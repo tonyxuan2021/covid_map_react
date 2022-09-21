@@ -7,23 +7,18 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const DataLeft = ({ covidDataCanada }) => {
+const DataLeft = ({ covidDataWorld }) => {
   const {
     cases,
-    country,
     deaths,
     population,
     recovered,
     tests,
     todayCases,
     todayRecovered,
-  } = covidDataCanada;
+  } = covidDataWorld;
 
   const dynamicData = [
-    {
-      title: "Country",
-      text: country,
-    },
     {
       title: "Population",
       text: Number(population).toLocaleString(),
@@ -39,6 +34,10 @@ const DataLeft = ({ covidDataCanada }) => {
       text: Number(deaths).toLocaleString(),
     },
     {
+      title: "Death rate",
+      text: ((Number(deaths) / Number(cases)) * 100).toFixed(2) + "%",
+    },
+    {
       title: "Total recovered",
       text: Number(recovered).toLocaleString(),
     },
@@ -48,7 +47,7 @@ const DataLeft = ({ covidDataCanada }) => {
     },
     {
       title: "Cases today",
-      text: todayCases,
+      text: Number(todayCases).toLocaleString(),
     },
     {
       title: "Recovered today",
@@ -58,9 +57,9 @@ const DataLeft = ({ covidDataCanada }) => {
 
   return (
     <List>
-      {dynamicData.map((data) => {
+      {dynamicData.map((data, index) => {
         return (
-          <div>
+          <div key={index}>
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemText
