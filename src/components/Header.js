@@ -3,11 +3,11 @@ import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import axios from "axios";
+import { IconButton } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -24,15 +24,15 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
+// const SearchIconWrapper = styled("div")(({ theme }) => ({
+//   padding: theme.spacing(0, 2),
+//   height: "100%",
+//   position: "absolute",
+//   pointerEvents: "none",
+//   display: "flex",
+//   alignItems: "center",
+//   justifyContent: "center",
+// }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
@@ -52,6 +52,27 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
+  const [countryName, setCountryName] = React.useState("");
+
+  React.useEffect(() => {}, [countryName]);
+
+  const handleOnChange = (e) => {
+    setCountryName(e.target.value);
+  };
+
+  const handleSearchCountry = () => {
+    const fetchData = async () => {
+      const fetchedData = await axios.get(
+        `https://disease.sh/v3/covid-19/countries/${countryName}?strict=true`
+      );
+
+      console.log(fetchedData);
+    };
+    fetchData();
+  };
+
+  console.log(countryName);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ background: "#092c74" }}>
@@ -65,13 +86,20 @@ export default function Header() {
             COVID Dashboard
           </Typography>
           <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={handleOnChange}
+              value={countryName}
             />
+            <IconButton
+              size="large"
+              aria-label="search"
+              color="inherit"
+              onClick={handleSearchCountry}
+            >
+              <SearchIcon />
+            </IconButton>
           </Search>
         </Toolbar>
       </AppBar>
