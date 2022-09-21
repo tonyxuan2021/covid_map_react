@@ -20,7 +20,7 @@ const DataLeft = ({ covidDataWorld }) => {
 
   const dynamicData = [
     {
-      title: "Population",
+      title: "World population",
       text: Number(population).toLocaleString(),
     },
 

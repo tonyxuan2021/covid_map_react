@@ -3,18 +3,10 @@ import axios from "axios";
 import {
   MapContainer,
   TileLayer,
-  Popup,
-  Marker,
-  SVGOverlay,
-  circle,
+  Tooltip,
   LayerGroup,
-  Circle,
+  CircleMarker,
 } from "react-leaflet";
-
-// const bounds = [
-//   [49, -123],
-//   [50, -30],
-// ];
 
 const Map = () => {
   const [countriesData, setCountriesData] = useState([]);
@@ -35,7 +27,7 @@ const Map = () => {
     return <p>Loading...</p>;
   }
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div>
@@ -45,31 +37,26 @@ const Map = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LayerGroup>
-          {data.map((country) => {
+          {data.map((country, index) => {
             const { lat } = country.countryInfo;
             const { long } = country.countryInfo;
             const { cases } = country;
             return (
-              <Circle
+              <CircleMarker
                 center={[lat, long]}
-                pathOptions={redOptions}
-                radius={Number(cases) / 100}
-              />
+                pathOptions={{ color: "red" }}
+                radius={Number(cases) / 2000000}
+                key={index}
+              >
+                <Tooltip>
+                  {`${country.country}: ${Number(cases).toLocaleString()}`}{" "}
+                  Cases
+                </Tooltip>
+              </CircleMarker>
             );
           })}
-
-          {/* <Circle
-            center={[49, -123]}
-            pathOptions={redOptions}
-            radius={1000000}
-          /> */}
         </LayerGroup>
-        {/* <SVGOverlay
-          attributes={{ stroke: "red", width: "100px", height: "100px" }}
-          bounds={bounds}
-        >
-          <circle r="5" cx="10" cy="10" fill="red" />
-        </SVGOverlay> */}
+
         {/* <Marker position={[49, -123]}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
