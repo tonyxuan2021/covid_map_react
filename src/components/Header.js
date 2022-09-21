@@ -8,6 +8,8 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import { IconButton } from "@mui/material";
+import { useGlobalContext } from "../contextAPI/Context";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -23,16 +25,6 @@ const Search = styled("div")(({ theme }) => ({
     width: "auto",
   },
 }));
-
-// const SearchIconWrapper = styled("div")(({ theme }) => ({
-//   padding: theme.spacing(0, 2),
-//   height: "100%",
-//   position: "absolute",
-//   pointerEvents: "none",
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-// }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
@@ -52,7 +44,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
-  const [countryName, setCountryName] = React.useState("");
+  // const [countryName, setCountryName] = React.useState("");
+
+  const { countryName, setCountryName, countryData, setCountryData } =
+    useGlobalContext();
+
+  const navigate = useNavigate();
 
   React.useEffect(() => {}, [countryName]);
 
@@ -66,9 +63,12 @@ export default function Header() {
         `https://disease.sh/v3/covid-19/countries/${countryName}?strict=true`
       );
 
-      console.log(fetchedData);
+      // console.log(fetchedData);
+      setCountryData(fetchedData);
+      setCountryName("");
     };
     fetchData();
+    navigate("/country");
   };
 
   console.log(countryName);
