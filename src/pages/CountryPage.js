@@ -1,11 +1,21 @@
 import { Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import img from "../10-2500x1667.jpg";
 import CoronavirusIcon from "@mui/icons-material/Coronavirus";
 import { useGlobalContext } from "../contextAPI/Context";
+import axios from "axios";
+
+const api_key = process.env.API_KEY;
 
 const CountryPage = () => {
-  const { countryData } = useGlobalContext();
+  const [countryImg, setCountryImg] = useState(null);
+  const {
+    countryData,
+    countryLat,
+    countryLong,
+    setCountryLat,
+    setCountryLong,
+  } = useGlobalContext();
 
   if (!countryData) {
     return <p>Loading...</p>;
@@ -14,6 +24,20 @@ const CountryPage = () => {
   const contryDataObj = countryData.data;
   const { country, cases, countryInfo, deaths, recovered, tests, updated } =
     contryDataObj;
+
+  setCountryLat(countryInfo.lat);
+  setCountryLong(countryInfo.long);
+
+  const fetchData = async () => {
+    const fetchedData = await axios.get(
+      `https://maps.geoapify.com/v1/staticmap?style=osm-bright-smooth&width=800&height=600&center=lonlat:105,35&zoom=2&apiKey=${api_key}`
+    );
+
+    setCountryImg(fetchedData);
+  };
+  fetchData();
+
+  console.log(countryImg);
 
   return (
     <Grid
