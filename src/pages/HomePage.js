@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import Map from "../components/Map";
 import DataLeft from "../components/DataLeft";
-
 import axios from "axios";
-import Header from "../components/Header";
 
 const HomePage = () => {
-  const [covidDataWorld, setCovidDataWorld] = useState(null);
+  const [covidDataWorld, setCovidDataWorld] = useState("");
 
   const url = `https://disease.sh/v3/covid-19/all`;
 
@@ -26,9 +24,6 @@ const HomePage = () => {
 
   return (
     <Grid item>
-      <Grid item>
-        <Header />
-      </Grid>
       <Grid container item>
         <Grid item xs={2}>
           <DataLeft covidDataWorld={covidDataWorld} />

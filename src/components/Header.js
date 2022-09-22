@@ -9,7 +9,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import { IconButton } from "@mui/material";
 import { useGlobalContext } from "../contextAPI/Context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -63,7 +63,7 @@ export default function Header() {
         `https://disease.sh/v3/covid-19/countries/${countryName}?strict=true`
       );
 
-      // console.log(fetchedData);
+      console.log(fetchedData);
       setCountryData(fetchedData);
       setCountryName("");
     };
@@ -71,20 +71,18 @@ export default function Header() {
     navigate("/country");
   };
 
-  console.log(countryName);
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ background: "#092c74" }}>
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+          <Link
+            to="/"
+            style={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            COVID Dashboard
-          </Typography>
+            <Typography variant="h6" noWrap component="div">
+              COVID Dashboard
+            </Typography>
+          </Link>
           <Search>
             <StyledInputBase
               placeholder="Search…"
