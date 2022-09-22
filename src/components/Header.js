@@ -63,7 +63,7 @@ export default function Header() {
         `https://disease.sh/v3/covid-19/countries/${countryName}?strict=true`
       );
 
-      console.log(fetchedData);
+      // console.log(fetchedData);
       setCountryData(fetchedData);
       setCountryName("");
     };
@@ -77,7 +77,7 @@ export default function Header() {
         <Toolbar>
           <Link
             to="/"
-            style={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
           >
             <Typography variant="h6" noWrap component="div">
               COVID Dashboard
