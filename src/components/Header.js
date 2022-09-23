@@ -76,7 +76,7 @@ export default function Header() {
       <AppBar position="static" sx={{ background: "#092c74" }}>
         <Toolbar>
           <Link
-            to="/"
+            to="/home"
             style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
           >
             <Typography variant="h6" noWrap component="div">

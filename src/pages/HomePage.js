@@ -3,6 +3,8 @@ import { Grid } from "@mui/material";
 import Map from "../components/Map";
 import DataLeft from "../components/DataLeft";
 import axios from "axios";
+import { Chart1 } from "../components/Chart1";
+import Header from "../components/Header";
 
 const HomePage = () => {
   const [covidDataWorld, setCovidDataWorld] = useState("");
@@ -24,6 +26,7 @@ const HomePage = () => {
 
   return (
     <Grid item>
+      <Header />
       <Grid container item>
         <Grid item xs={2}>
           <DataLeft covidDataWorld={covidDataWorld} />
@@ -31,7 +34,9 @@ const HomePage = () => {
         <Grid item xs={7}>
           <Map />
         </Grid>
-        <Grid item xs={3}></Grid>
+        <Grid item xs={3}>
+          <Chart1 />
+        </Grid>
       </Grid>
     </Grid>
   );
