@@ -4,6 +4,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import React from "react";
 
@@ -63,8 +64,12 @@ const DataLeft = ({ covidDataWorld }) => {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemText
-                  primary={`${data.title}`}
-                  secondary={`${data.text}`}
+                  primary={<Typography variant="h5">{data.title}</Typography>}
+                  secondary={
+                    <Typography variant="body1" sx={{ color: "black" }}>
+                      {data.text}
+                    </Typography>
+                  }
                   sx={{ color: "#ae2012" }}
                 />
               </ListItemButton>

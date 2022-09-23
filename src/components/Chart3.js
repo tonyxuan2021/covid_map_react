@@ -32,7 +32,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Weekly Cases",
+      text: "Weekly Vaccinated",
       font: {
         size: 20,
       },
@@ -40,30 +40,27 @@ export const options = {
   },
 };
 
-export function Chart1() {
-  const url = `https://disease.sh/v3/covid-19/historical/all?lastdays=7`;
+export function Chart3() {
+  const url = `https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=7&fullData=false`;
 
   const [caseDay, setCaseDay] = useState("");
-  const [cases, setCases] = useState([]);
+  const [cases, setCases] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const fetchedData = await axios.get(url);
-      // console.log(fetchedData);
+      console.log(fetchedData);
 
       // function reduceDigit(array) {
       //   array.map((item) => {
       //     return item / 10;
       //   });
       // }
-      setCases(Object.values(fetchedData.data.cases));
-      setCaseDay(Object.keys(fetchedData.data.cases));
+      setCases(Object.values(fetchedData.data));
+      setCaseDay(Object.keys(fetchedData.data));
     };
     fetchData();
   }, []);
-
-  console.log(typeof cases[0]);
-  // console.log(caseDay);
 
   const labels = caseDay;
 
@@ -76,7 +73,7 @@ export function Chart1() {
         data: cases,
         //   data: fetchedDate,
         borderColor: "white",
-        backgroundColor: "#ffd60a",
+        backgroundColor: "#80ed99",
       },
     ],
   };

@@ -5,6 +5,8 @@ import DataLeft from "../components/DataLeft";
 import axios from "axios";
 import { Chart1 } from "../components/Chart1";
 import Header from "../components/Header";
+import { Chart2 } from "../components/Chart2";
+import { Chart3 } from "../components/Chart3";
 
 const HomePage = () => {
   const [covidDataWorld, setCovidDataWorld] = useState("");
@@ -25,17 +27,19 @@ const HomePage = () => {
   }
 
   return (
-    <Grid item>
+    <Grid container item>
       <Header />
-      <Grid container item>
-        <Grid item xs={2}>
+      <Grid container item spacing={2} sx={{ pl: 2, pr: 2 }}>
+        <Grid item xs={2.5}>
           <DataLeft covidDataWorld={covidDataWorld} />
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={6}>
           <Map />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={3.5} display="flex" flexDirection="column" gap={5}>
           <Chart1 />
+          <Chart2 />
+          <Chart3 />
         </Grid>
       </Grid>
     </Grid>

@@ -32,7 +32,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Weekly Cases",
+      text: "Weekly Deaths",
       font: {
         size: 20,
       },
@@ -40,7 +40,7 @@ export const options = {
   },
 };
 
-export function Chart1() {
+export function Chart2() {
   const url = `https://disease.sh/v3/covid-19/historical/all?lastdays=7`;
 
   const [caseDay, setCaseDay] = useState("");
@@ -56,14 +56,11 @@ export function Chart1() {
       //     return item / 10;
       //   });
       // }
-      setCases(Object.values(fetchedData.data.cases));
-      setCaseDay(Object.keys(fetchedData.data.cases));
+      setCases(Object.values(fetchedData.data.deaths));
+      setCaseDay(Object.keys(fetchedData.data.deaths));
     };
     fetchData();
   }, []);
-
-  console.log(typeof cases[0]);
-  // console.log(caseDay);
 
   const labels = caseDay;
 
@@ -76,7 +73,7 @@ export function Chart1() {
         data: cases,
         //   data: fetchedDate,
         borderColor: "white",
-        backgroundColor: "#ffd60a",
+        backgroundColor: "#e63946",
       },
     ],
   };
